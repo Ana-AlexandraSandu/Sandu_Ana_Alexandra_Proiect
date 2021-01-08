@@ -1,0 +1,97 @@
+﻿@page "/{id:int?}"
+@model Sandu_Ana_Alexandra_Proiect.Pages.Vacante.IndexModel
+
+@{
+    ViewData["Title"] = "Vacante";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<form>
+    <select asp-for="CategorieVacanta" asp-items="Model.Categorie">
+        <option value="">All</option>
+
+    </select>
+    <p>
+        Title: <input type="text" asp-for="SearchString" />
+        <input type="submit" value="Filter" />
+    </p>
+
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Vacanta[0].Tara)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vacanta[0].Ghid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vacanta[0].Categorie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vacanta[0].Pret)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vacanta[0].Dataplecare)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vacanta[0].Datasosire)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vacanta[0].GhidID)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.VacantaD.Vacante) {
+                string selectedRow = "";
+                if (item.ID == Model.VacantaID)
+                {
+                    selectedRow = "table-success";
+                }
+    <tr class="@selectedRow">
+        <td>
+            @Html.DisplayFor(modelItem => item.Tara)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ghid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Categorie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pret)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Dataplecare)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Datasosire)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ghid.NumeGhid)
+        </td>
+        <td>
+        @{
+        foreach (var category in item.CategoriiVacanta)
+        {
+        @category.Categorie.ID@: @category.Categorie.NumeCategorie
+        <br/>
+        }
+        }
+        </td>
+        <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

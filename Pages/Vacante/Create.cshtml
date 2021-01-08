@@ -1,0 +1,88 @@
+﻿@page
+@model Sandu_Ana_Alexandra_Proiect.Pages.Vacante.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Vacanta</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Vacanta.Tara" class="control-label"></label>
+                <input asp-for="Vacanta.Tara" class="form-control" />
+                <span asp-validation-for="Vacanta.Tara" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vacanta.Ghid" class="control-label"></label>
+                <input asp-for="Vacanta.Ghid" class="form-control" />
+                <span asp-validation-for="Vacanta.Ghid" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vacanta.Categorie" class="control-label"></label>
+                <input asp-for="Vacanta.Categorie" class="form-control" />
+                <span asp-validation-for="Vacanta.Categorie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vacanta.Pret" class="control-label"></label>
+                <input asp-for="Vacanta.Pret" class="form-control" />
+                <span asp-validation-for="Vacanta.Pret" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vacanta.Dataplecare" class="control-label"></label>
+                <input asp-for="Vacanta.Dataplecare" class="form-control" />
+                <span asp-validation-for="Vacanta.Dataplecare" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Vacanta.Datasosire" class="control-label"></label>
+                <input asp-for="Vacanta.Datasosire" class="form-control" />
+                <span asp-validation-for="Vacanta.Datasosire" class="text-danger"></span>
+            </div>
+            <label asp-for="Vacanta.GhidID" class="control-label">Nume Ghid</label>
+            <select asp-for="Vacanta.GhidID" class="form-control" asp-items="ViewBag.GhidID">
+            </select>
+            <span asp-validation-for="Vacanta.GhidID" class="text-danger"></span>
+            <div class="form-group">
+                <div class="table">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+                                foreach (var cat in Model.AssignedCategoryDataList)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedCourses"
+                                               value="@cat.CategorieID"
+                                               @(Html.Raw(cat.Assigned ? "checked=\"checked\"" : "")) />
+                                        @cat.CategorieID @: @cat.Nume
+                                    @:</td>
+                                }
+                            @:</tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
